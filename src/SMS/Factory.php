@@ -12,6 +12,7 @@ use SMS\Model\Number;
 use SMS\Model\SMS;
 use SMS\Facade;
 use SMS\Model\Adapter\SMSAPI;
+use SMS\Model\Adapter\OVHAPI;
 use SMS\Model\Adapter\Mock;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -81,6 +82,22 @@ class Factory implements ServiceLocatorAwareInterface
 
         return $sms;
     }
+    
+    /**
+     * @return \SMS\Model\SMS
+     */
+    public function makeOVHAPI()
+    {
+    	$adapter = new OVHAPI();
+    	$adapter->setFacadeSMS($this->getFacadeSMS());
+    
+    	$sms = new SMS();
+    	$sms->setAdapter($adapter);
+    
+    	return $sms;
+    }
+    
+    
 
     /**
      * @return \SMS\Model\SMS

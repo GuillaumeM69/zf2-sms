@@ -10,4 +10,10 @@ return array(
         'username' => '',
         'password' => '',
     ),
+		'ovhapi' => array(
+				'url' => 'https://www.ovh.com/cgi-bin/sms/http2sms.cgi',
+				'account'  => 'sms-*****',
+				'username' => '****',
+				'password' => '*******',
+		),
 );

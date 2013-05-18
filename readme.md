@@ -31,6 +31,16 @@ class IndexController extends AbstractActionController implements CountryPrefix
     {
         $this->facadeSMS = $facade;
     }
+    
+
+    public function getServiceFactorySMS()
+    {
+    	$sm = $this->getServiceLocator();
+    	
+    	$factory = $sm->get('SMS\Factory');
+        
+        $this->setFacadeSMS($factory->getFacadeSMS());
+    }
 
     /**
      * @return ViewModel
@@ -48,6 +58,29 @@ class IndexController extends AbstractActionController implements CountryPrefix
         $result = $sms->send();
 
         return new ViewModel(array('result' => $result));
+    }
+    
+    /**
+     * @return ViewModel
+     */
+    public function smsviaovhAction()
+    {
+    	
+    	$this->getServiceFactorySMS();
+    	
+    	$sms = $this->facadeSMS->makeOVHAPI();
+    	$sms->setFrom(
+    			$this->facadeSMS->makeNumber(CountryPrefix::FRANCE, '612321232')
+    	)->setTo(
+    			$this->facadeSMS->makeNumber(CountryPrefix::GREAT_BRITAIN, '123456789')
+    	)->setContent(
+    			$this->facadeSMS->makeContent($message)
+    	);
+    	$result = $sms->send();
+    	
+    	return new ViewModel(array('result' => $result));
+    	
+        
     }
 }
 ```

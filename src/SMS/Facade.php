@@ -62,6 +62,14 @@ class Facade
     {
         return $this->factory->makeSMSAPI();
     }
+    
+    /**
+     * @return \SMS\Model\SMS
+     */
+    public function makeOVHAPI()
+    {
+    	return $this->factory->makeOVHAPI();
+    }
 
     /**
      * @return \SMS\Model\SMS
