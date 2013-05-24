@@ -53,7 +53,7 @@ class OVHAPI extends AdapterAbstract
        // {"status":100,"creditLeft":"1007","SmsIds":["10867690"]}
         if($responsejson->status != 100)
         {
-        	throw new SMSException($response);
+        	return false;
         }
 
         
