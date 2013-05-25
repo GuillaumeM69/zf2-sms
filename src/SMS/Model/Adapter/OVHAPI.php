@@ -45,6 +45,11 @@ class OVHAPI extends AdapterAbstract
         
         $client->setUri($this->prepareUrl($from, $to, $content));
         $client->setMethod('GET');
+        $client->setOptions(array(
+        		 'ssltransport' => 'tls',
++                'sslverify_peer' => false
+        		
+        						));
         $response = $client->send($client->getRequest());
         
         $responsejson = json_decode($response->getContent());
