@@ -83,7 +83,7 @@ class OVHAPI extends AdapterAbstract
         	$config['ovhapi']['account'],
             $config['ovhapi']['username'],
             $config['ovhapi']['password'],
-        	$from,
+        	$config['ovhapi']['from'],
         	$to,
         	$content
        				);
