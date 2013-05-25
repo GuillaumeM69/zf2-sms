@@ -40,26 +40,22 @@ class OVHAPI extends AdapterAbstract
     {
         
         
-        
-        $client = new Client();
-        
+    $client = new Client();
         $client->setUri($this->prepareUrl($from, $to, $content));
         $client->setMethod('GET');
         $client->setOptions(array(
-        		 'ssltransport' => 'tls',
-+                'sslverify_peer' => false
-        		
-        						));
+                         'ssltransport' => 'tls',
+                         'sslverify_peer' => false,
+                         'sslcapath' => '/etc/ssl/certs'
+                                                        ));
         $response = $client->send($client->getRequest());
-        
         $responsejson = json_decode($response->getContent());
-      
-       
-       // {"status":100,"creditLeft":"1007","SmsIds":["10867690"]}
+
         if($responsejson->status != 100)
         {
-        	return false;
+                throw new SMSException($response);
         }
+    	
 
         
         
